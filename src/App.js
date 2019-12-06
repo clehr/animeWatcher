@@ -7,7 +7,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       episodeToWatch: 903,
-      lastEpisode: 905
+      lastEpisode: ""
     };
     this.setEpisodeToWatch = this.setEpisodeToWatch.bind(this)
   }
@@ -27,8 +27,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-
-    console.log("react: " + this.state.lastEpisode);
+    firebase.database().ref("last_episode").once('value', storedValue => this.setState({ lastEpisode: storedValue.val() }));
   }
 
   setEpisodeToWatch(event) {
