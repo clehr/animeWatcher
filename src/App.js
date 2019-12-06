@@ -8,7 +8,8 @@ class App extends React.Component {
     this.state = {
       episodeToWatch: '',
       lastEpisode: '',
-      anime: ''
+      anime: '',
+      background: ''
     };
     this.setEpisodeToWatch = this.setEpisodeToWatch.bind(this)
     this.setLastWatchedEpisode = this.setLastWatchedEpisode.bind(this)
@@ -16,7 +17,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="vh-100 dt w-100">
+      <div className={"vh-100 dt w-100 " + (this.state.background)}>
         <div className="dtc v-mid tc">
           <p className="avenir b">All episodes can be found <a target="_blank" rel="noopener noreferrer" href="http://onepiece-tube.com/episoden-streams">here</a></p>
           <p className="avenir i b">Last Episode of {this.state.anime} was: <input type="text" value={this.state.lastEpisode} onChange={this.setLastWatchedEpisode} style={{ width: '50px' }} /></p>
@@ -35,6 +36,22 @@ class App extends React.Component {
     firebase.database().ref('last_episode').child("one_piece").once('value', storedValue => this.setState({ lastEpisode: storedValue.val() }));
     firebase.database().ref('last_episode').child("one_piece").once('value', storedValue => this.setState({ episodeToWatch: parseInt(storedValue.val()) + 1 }));
     firebase.database().ref('last_episode').child("one_piece").once('value', storedValue => this.setState({ anime: storedValue.key }));
+
+    var backgrounds = [
+      'Background_one',
+      'Background_two',
+      'Background_three',
+      'Background_four',
+      'Background_five',
+      'Background_six',
+      'Background_seven',
+      'Background_eight',
+      'Background_nine',
+    ];
+
+    this.setState({
+      background: backgrounds[Math.floor(Math.random() * backgrounds.length)]
+    });
   }
 
   setEpisodeToWatch(event) {
