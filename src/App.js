@@ -27,6 +27,7 @@ class App extends React.Component {
     return (
       <div className={"vh-100 dt w-100 " + (this.state.background)}>
         <div className="dtc v-mid tc">
+          <h3 className="avenir">Welcome to Anime Watcher!</h3>
           <p className="avenir b">Enter password:</p>
           <input className="mb3" onChange={this.setPassword} />
           {this.state.password == this.state.auth &&
